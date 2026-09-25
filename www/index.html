@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="theme-color" content="#0B3D1E" />
+  <title>Anotações Hidroponia</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: system-ui, -apple-system, sans-serif;
+      background: #0B3D1E;
+      color: #e8f5e9;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      text-align: center;
+    }
+    h1 { font-size: 1.4rem; margin-bottom: 8px; }
+    p { opacity: 0.85; margin-bottom: 20px; line-height: 1.5; }
+    a {
+      display: inline-block;
+      background: #22C55E;
+      color: #062814;
+      font-weight: 700;
+      text-decoration: none;
+      padding: 14px 28px;
+      border-radius: 12px;
+    }
+    .spin {
+      width: 36px; height: 36px;
+      border: 3px solid rgba(255,255,255,0.2);
+      border-top-color: #22C55E;
+      border-radius: 50%;
+      animation: s 0.8s linear infinite;
+      margin-bottom: 16px;
+    }
+    @keyframes s { to { transform: rotate(360deg); } }
+  </style>
+  <script>
+    // Tenta abrir o app no Vercel (API + MongoDB)
+    var APP = 'https://anotacoes-hidroponia.vercel.app/app';
+    setTimeout(function () { window.location.replace(APP); }, 400);
+  </script>
+</head>
+<body>
+  <div class="spin"></div>
+  <h1>Anotações Hidroponia</h1>
+  <p>Carregando o app…</p>
+  <a href="https://anotacoes-hidroponia.vercel.app/app">Abrir manualmente</a>
+</body>
+</html>

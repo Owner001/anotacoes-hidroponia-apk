@@ -3,8 +3,13 @@
   "appName": "Anotações Hidroponia",
   "webDir": "www",
   "server": {
+    "url": "https://anotacoes-hidroponia.vercel.app/app",
     "androidScheme": "https",
-    "allowNavigation": ["anotacoes-hidroponia.vercel.app", "*.vercel.app"]
+    "cleartext": true,
+    "allowNavigation": [
+      "anotacoes-hidroponia.vercel.app",
+      "*.vercel.app"
+    ]
   },
   "android": {
     "allowMixedContent": true
