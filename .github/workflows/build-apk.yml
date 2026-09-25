@@ -20,16 +20,14 @@ jobs:
 
       - name: Setup Android SDK
         uses: android-actions/setup-android@v3
-        with:
-          accept-android-sdk-licenses: true
 
-      - name: Accept Android licenses
+      - name: Accept Android SDK licenses
         run: |
-          yes | sdkmanager --licenses || true
-          mkdir -p "$ANDROID_HOME/licenses"
-          echo -e "24333f8a63b6825ea9c5514f07c9298d9dce5a58\n" > "$ANDROID_HOME/licenses/android-sdk-license"
-          echo -e "84831b9409646a918e30573bab4c9c91346d8abd\n" > "$ANDROID_HOME/licenses/android-sdk-preview-license"
-          echo -e "d56f5187479451eabf01fb78af6dfcb131a6481e\n" > "$ANDROID_HOME/licenses/android-sdk-license"
+          mkdir -p $ANDROID_HOME/licenses
+          echo "24333f8a63b6825ea9c5514f07c9298d9dce5a58" > $ANDROID_HOME/licenses/android-sdk-license
+          echo "84831b9409646a918e30573bab4c9c91346d8abd" > $ANDROID_HOME/licenses/android-sdk-preview-license
+          echo "d56f5187479451eabf01fb78af6dfcb131a6481e" > $ANDROID_HOME/licenses/android-sdk-license
+          yes | sdkmanager --licenses >/dev/null || true
 
       - name: Set up Node
         uses: actions/setup-node@v4
@@ -42,15 +40,12 @@ jobs:
       - name: Sync Capacitor
         run: npx cap sync android
 
-      - name: Ensure Gradle Wrapper
+      - name: Install Gradle and generate wrapper
         working-directory: android
         run: |
-          if [ ! -f gradle/wrapper/gradle-wrapper.jar ]; then
-            curl -sL -o gradle/wrapper/gradle-wrapper.jar \
-              https://raw.githubusercontent.com/gradle/gradle/v8.2.1/gradle/wrapper/gradle-wrapper.jar \
-              || curl -sL -o gradle/wrapper/gradle-wrapper.jar \
-              https://github.com/gradle/gradle/raw/v8.2.1/gradle/wrapper/gradle-wrapper.jar
-          fi
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq gradle
+          gradle wrapper --gradle-version 8.2.1
           chmod +x gradlew
 
       - name: Build debug APK
