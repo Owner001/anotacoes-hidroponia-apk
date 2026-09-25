@@ -18,7 +18,7 @@ jobs:
           distribution: temurin
           java-version: "17"
 
-      - name: Setup Android SDK (cmdline-tools)
+      - name: Setup Android SDK
         uses: android-actions/setup-android@v3
         with:
           packages: ""
@@ -28,8 +28,6 @@ jobs:
           yes | sdkmanager --licenses >/dev/null 2>&1 || true
           sdkmanager "platform-tools" "platforms;android-34" "build-tools;34.0.0"
           yes | sdkmanager --licenses >/dev/null 2>&1 || true
-          echo "ANDROID_HOME=$ANDROID_HOME"
-          ls "$ANDROID_HOME" || true
 
       - name: Set up Node
         uses: actions/setup-node@v4
@@ -42,18 +40,20 @@ jobs:
       - name: Sync Capacitor
         run: npx cap sync android
 
+      - name: Setup Gradle 8.2.1
+        uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: "8.2.1"
+
       - name: Generate Gradle Wrapper
         working-directory: android
         run: |
-          sudo apt-get update -qq
-          sudo apt-get install -y -qq gradle
           gradle wrapper --gradle-version 8.2.1
           chmod +x gradlew
+          cat gradle/wrapper/gradle-wrapper.properties
 
       - name: Build debug APK
         working-directory: android
-        env:
-          ANDROID_HOME: ${{ env.ANDROID_HOME }}
         run: ./gradlew assembleDebug --no-daemon --stacktrace
 
       - name: Upload APK
