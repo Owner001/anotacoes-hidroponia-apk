@@ -1,0 +1,15 @@
+{
+  "appId": "com.trespoderes.anotacoes",
+  "appName": "Anotações Hidroponia",
+  "webDir": "www",
+  "server": {
+    "androidScheme": "https",
+    "allowNavigation": [
+      "anotacoes-hidroponia.vercel.app",
+      "*.vercel.app"
+    ]
+  },
+  "android": {
+    "allowMixedContent": true
+  }
+}
